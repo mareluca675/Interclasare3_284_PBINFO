@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define START ios_base::sync_with_stdio(false); fin.tie(nullptr); fout.tie(nullptr);
+#define FINISH fin.close(); fout.close(); return 0;
+
+typedef unsigned long long ull;
+
+ifstream fin("interclasare3.in");
+ofstream fout("interclasare3.out");
+
+int main() {
+    START;
+
+    int n, m, i, j, k = 0, A[100001], B[100001], C[100001];
+
+    fin >> n >> m;
+    for (i = 1; i <= n; ++i) {
+        fin >> A[i];
+    }
+
+    for (i = 1; i <= m; ++i) {
+        fin >> B[i];
+    }
+
+    for (i = 1, j = m; i <= n and j >= 1;) {
+        if (A[i] % 2 == 0 and B[j] % 2 == 0) {
+            if (A[i] < B[j]) {
+                C[++k] = A[i];
+                ++i;
+            } else {
+                C[++k] = B[j];
+                --j;
+            }
+        } else {
+            if (A[i] % 2 == 1) {
+                ++i;
+            } else {
+                --j;
+            }
+        }
+    }
+
+    for (; i <= n; ++i){
+        if (A[i] % 2 == 0) {
+            C[++k] = A[i];
+        }
+    }
+
+    for(; j >= 1; -- j) {
+        if (B[j] % 2 == 0) {
+            C[++k] = B[j];
+        }
+    }
+
+    for(i = 1; i <= k; ++ i){
+        fout << C[i] << ' ';
+        if(i % 20 == 0){
+            fout << '\n';
+        }
+    }
+
+    FINISH;
+}
